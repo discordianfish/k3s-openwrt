@@ -11,7 +11,7 @@ jobs:
           command: |
             curl -L https://github.com/tcnksm/ghr/releases/download/v0.12.0/ghr_v0.12.0_linux_amd64.tar.gz \
               | sudo tar --strip=1 -C /usr/bin -xzvf -
-            make build-all
+            make release
 
 workflows:
   version: 2
