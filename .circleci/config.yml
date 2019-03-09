@@ -1,0 +1,25 @@
+version: 2
+jobs:
+  all:
+    docker:
+      - image: circleci/golang:1.11
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: build-and-release
+          command: |
+            curl -L https://github.com/tcnksm/ghr/releases/download/v0.12.0/ghr_v0.12.0_linux_amd64.tar.gz \
+              | sudo tar --strip=1 -C /usr/bin -xzvf -
+            make build-all
+
+workflows:
+  version: 2
+  all:
+    jobs:
+      - all:
+          filters:
+            tags:
+              only: /^[0-9]*$/
+            branches:
+              ignore: /.*/

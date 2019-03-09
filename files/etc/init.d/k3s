@@ -1,0 +1,16 @@
+#!/bin/sh /etc/rc.common
+
+START=60
+STOP=20
+
+PIDFILE=/var/run/k3s.pid
+EXEC="/usr/bin/k3s"
+
+start() {
+  start-stop-daemon -S -b -x "$EXEC" -m -p "$PIDFILE" \
+    -- server --data-dir $(uci_get k3s.globals.root)
+}
+
+stop() {
+  start-stop-daemon -K -p "$PIDFILE"
+}
