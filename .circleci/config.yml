@@ -18,6 +18,7 @@ workflows:
   all:
     jobs:
       - all:
+          context: default
           filters:
             tags:
               only: /^[0-9]*$/
