@@ -1,29 +1,32 @@
 # k3s on OpenWrt
 Makefile to generate OpenWrt .opkg packages from official k3s binaries.
 
+## Known Issues
+Service IPs aren't working for some reason :(
+
 ## Usage
 This requires a custom kernel with support for various cgroup, namespaces, vxlan, cfs
 scheduler etc. See here for my openwrt config: https://github.com/5pi-home/openwrt/blob/master/config
 
 ### Firewall
 To allow the k3s' flannel bridge to access the internet, configure a interface
-for flannel.1 in uci:
+for cni0 in uci:
 
 /etc/config/network:
 ```
 config interface 'k8s'
 	option proto 'none'
-	option ifname 'flannel.1'
+	option ifname 'cni0'
 ```
 
-..and assign it to the lan zone:
+/etc/config/firewall
 ```
 config zone
-        option name 'lan'
+        option name 'k8s'
         option input 'ACCEPT'
         option output 'ACCEPT'
         option forward 'ACCEPT'
-        option network 'lan k8s'
+        option network 'k8s'
 ```
 
 ## Building
