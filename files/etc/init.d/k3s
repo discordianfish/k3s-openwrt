@@ -8,7 +8,8 @@ EXEC="/usr/bin/k3s"
 
 start() {
   start-stop-daemon -S -b -x "$EXEC" -m -p "$PIDFILE" \
-    -- server --data-dir $(uci_get k3s.globals.root)
+    -- server --no-deploy traefik \
+    --data-dir $(uci_get k3s.globals.root)
 }
 
 stop() {
