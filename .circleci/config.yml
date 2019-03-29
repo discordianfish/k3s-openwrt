@@ -21,6 +21,6 @@ workflows:
           context: default
           filters:
             tags:
-              only: /^[0-9]*$/
+              only: /^.*$/
             branches:
               ignore: /.*/
