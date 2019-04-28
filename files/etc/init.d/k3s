@@ -8,9 +8,9 @@ EXEC="/usr/bin/k3s"
 
 ensure_cgroup_mount() {
   # Unmount /sys/fs/cgroup if mounted as cgroup
-  grep ' /sys/fs/cgroup cgroup' /proc/self/mounts && umount /sys/fs/cgroup
+  grep -q ' /sys/fs/cgroup cgroup' /proc/self/mounts && umount /sys/fs/cgroup
 
-  grep ' /sys/fs/cgroup tmpfs' /proc/self/mounts \
+  grep -q ' /sys/fs/cgroup tmpfs' /proc/self/mounts \
     || mount -t tmpfs -o uid=0,gid=0,mode=0755 cgroup /sys/fs/cgroup
 
   for sys in $(awk '!/^#/ { if ($4 == 1) print $1 }' /proc/cgroups); do
