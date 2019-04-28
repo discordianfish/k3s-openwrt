@@ -1,3 +1,0 @@
-config globals 'globals'
-  option root '/data/k3s'
-  option opts '--no-deploy'
