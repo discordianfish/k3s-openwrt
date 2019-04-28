@@ -10,7 +10,9 @@ ensure_cgroup_mount() {
   # Unmount /sys/fs/cgroup if mounted as cgroup
   grep ' /sys/fs/cgroup cgroup' /proc/self/mounts && umount /sys/fs/cgroup
 
-  mount -t tmpfs -o uid=0,gid=0,mode=0755 cgroup /sys/fs/cgroup
+  grep ' /sys/fs/cgroup tmpfs' /proc/self/mounts \
+    || mount -t tmpfs -o uid=0,gid=0,mode=0755 cgroup /sys/fs/cgroup
+
   for sys in $(awk '!/^#/ { if ($4 == 1) print $1 }' /proc/cgroups); do
     mnt="/sys/fs/cgroup/$sys"
     grep -q "cgroup $mnt " /proc/self/mounts && continue
@@ -22,7 +24,7 @@ ensure_cgroup_mount() {
 start() {
   ensure_cgroup_mount
   start-stop-daemon -S -b -x "$EXEC" -m -p "$PIDFILE" \
-    -- server $(uci_get k3s.globals.opts) --no-deploy traefik \
+    -- server $(uci_get k3s.globals.opts) \
     --data-dir $(uci_get k3s.globals.root)
 }
 
