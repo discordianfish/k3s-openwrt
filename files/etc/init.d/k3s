@@ -22,7 +22,7 @@ ensure_cgroup_mount() {
 start() {
   ensure_cgroup_mount
   start-stop-daemon -S -b -x "$EXEC" -m -p "$PIDFILE" \
-    -- server --no-deploy traefik \
+    -- server $(uci_get k3s.globals.opts) --no-deploy traefik \
     --data-dir $(uci_get k3s.globals.root)
 }
 
