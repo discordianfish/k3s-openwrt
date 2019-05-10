@@ -1,9 +1,6 @@
 # k3s on OpenWrt
 Makefile to generate OpenWrt .opkg packages from official k3s binaries.
 
-## Known Issues
-Service IPs aren't working for some reason :(
-
 ## Usage
 This requires a custom kernel with support for various cgroup, namespaces, vxlan, cfs
 scheduler etc. See here for my openwrt config: https://github.com/5pi-home/openwrt/blob/master/config
