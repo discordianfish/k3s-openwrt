@@ -1,4 +1,4 @@
-VERSION  ?= 0.9.1
+VERSION  ?= 1.17.4+k3s1
 PVERSION ?= 1
 ARCH     ?= x86_64
 suffix   := $(subst -x86_64,,-$(ARCH))
