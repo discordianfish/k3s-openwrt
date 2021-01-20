@@ -1,4 +1,4 @@
-VERSION  ?= 1.17.4+k3s1
+VERSION  ?= $(shell head -1 VERSIONS)
 PVERSION ?= 1
 ARCH     ?= x86_64
 suffix   := $(subst -x86_64,,-$(ARCH))
