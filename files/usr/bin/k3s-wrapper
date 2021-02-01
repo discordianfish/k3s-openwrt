@@ -1,0 +1,5 @@
+#!/bin/sh
+k3s "$@" 2>&1 | logger -t k3s &
+PID="$!"
+
+trap "kill $PID; wait $PID"

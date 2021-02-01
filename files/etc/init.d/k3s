@@ -4,7 +4,7 @@ START=60
 STOP=20
 
 PIDFILE=/var/run/k3s.pid
-EXEC="/usr/bin/k3s"
+EXEC="/usr/bin/k3s-wrapper"
 
 ensure_cgroup_mount() {
   # Unmount /sys/fs/cgroup if mounted as cgroup
