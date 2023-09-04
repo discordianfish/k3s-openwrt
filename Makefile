@@ -12,7 +12,7 @@ Package: k3s
 Version: ${VERSION}-${PVERSION}
 Architecture: $(ARCH)
 Maintainer: Johannes 'fish' Ziemke
-Depends: iptables kmod-ipt-extra iptables-mod-extra kmod-br-netfilter ca-certificates
+Depends: iptables iptables-mod-extra kmod-ipt-extra iptables-mod-extra kmod-br-netfilter ca-certificates
 Description: The Docker Engine packages for OpenWrt
 endef
 export CONTROL
@@ -40,7 +40,7 @@ $(DIR)/data: $(FILES)
 	mkdir -p "$@/usr/bin"
 	cp -r files/* "$@"
 	curl -sfLo "$@/usr/bin/k3s" \
-		https://github.com/rancher/k3s/releases/download/v$(VERSION)/k3s${suffix}
+		https://github.com/k3s-io/k3s/releases/download/v$(VERSION)/k3s${suffix}
 	chmod a+x "$@/usr/bin/k3s"
 
 $(DIR)/pkg/data.tar.gz: $(DIR)/data
